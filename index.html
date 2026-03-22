@@ -1,152 +1,688 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>John Murren</title>
-  <style>
-    body {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>John Murren — Product Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .container {
-      max-width: 850px;
-      margin: 40px auto;
-      padding: 30px;
-      background: #fff;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      border-radius: 8px;
-    }
+  :root {
+    --ink: #111010;
+    --ink-mid: #444;
+    --ink-soft: #777;
+    --ink-faint: #bbb;
+    --paper: #faf9f7;
+    --paper-warm: #f3f1ed;
+    --accent: #1a4d2e;
+    --accent-light: #ddeae2;
+    --rule: rgba(0,0,0,0.1);
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+    --max: 860px;
+    --pad: clamp(1.25rem, 5vw, 3rem);
+  }
 
-    h1, h2, h3 {
-      color: #222;
-      border-bottom: 1px solid #e0e0e0;
-      padding-bottom: 6px;
-    }
+  html { scroll-behavior: smooth; }
 
-    p {
-      line-height: 1.6;
-    }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    ul {
-      padding-left: 20px;
-    }
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 0 var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
 
-    a {
-      color: #0066cc;
-      text-decoration: none;
-    }
+  /* ── HERO ── */
+  .hero {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(4rem, 10vw, 8rem) var(--pad) clamp(3rem, 8vw, 6rem);
+    border-bottom: 1px solid var(--rule);
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 48px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--ink-mid);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.65rem 1.4rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+  }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule);
+  }
+  .btn-ghost:hover { border-color: var(--ink); }
 
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+  /* ── SECTIONS ── */
+  section {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 5rem) var(--pad);
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    height: 1px;
+    flex: 1;
+    background: var(--rule);
+  }
 
-    .header h1 {
-      margin-bottom: 10px;
-    }
+  /* ── SKILLS GRID ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .skill-item {
+    background: var(--paper);
+    padding: 1.25rem 1.5rem;
+    font-size: 0.85rem;
+    color: var(--ink-mid);
+    transition: background 0.2s;
+  }
+  .skill-item:hover { background: var(--accent-light); }
+  .skill-item strong {
+    display: block;
+    font-weight: 500;
+    font-size: 0.82rem;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
 
-    .header a {
-      display: inline-block;
-      margin: 0 10px;
-    }
+  /* ── EXPERIENCE ── */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr 160px;
+    gap: 1rem 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .exp-role {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+  .exp-company {
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .exp-date {
+    font-size: 0.75rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    text-align: right;
+    padding-top: 0.3rem;
+  }
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    padding: 0.3rem 0 0.3rem 1.1rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.35rem;
+  }
+  .exp-stat {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    margin-left: 0.25rem;
+  }
 
-    .job-title {
-      font-weight: bold;
-      margin-bottom: 4px;
-    }
+  /* ── FEATURED PROJECT (USRUGBY) ── */
+  .project-hero {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-hero::before {
+    content: 'USRugbyNews';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .project-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.6);
+    padding: 0.25rem 0.75rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+  .project-hero h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .project-hero p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 540px;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .project-metrics {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .metric { }
+  .metric-val {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--paper);
+    line-height: 1;
+    margin-bottom: 0.2rem;
+  }
+  .metric-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+  .project-pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .pillar {
+    background: var(--paper);
+    border-radius: 3px;
+    padding: 1.25rem 1.5rem;
+  }
+  .pillar-icon {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .pillar h4 {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+  .pillar p {
+    font-size: 0.82rem;
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
 
-    .section {
-      margin-bottom: 40px;
-    }
+  /* ── RESULTS STRIP ── */
+  .results-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 2rem;
+  }
+  .result-item {
+    background: var(--paper);
+    padding: 1.5rem 1.75rem;
+    text-align: center;
+  }
+  .result-num {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+  .result-desc {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
 
-    .section h3 {
-      margin-top: 20px;
-    }
-  </style>
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .contact-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  .contact-heading em { font-style: italic; color: var(--accent); }
+  .contact-body { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.75; }
+  .contact-details { list-style: none; display: flex; flex-direction: column; gap: 1rem; padding-top: 0.5rem; }
+  .contact-details a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.88rem;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.9rem 1.2rem;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .contact-details a:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-details .ci { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-left: auto; }
+
+  /* ── FOOTER ── */
+  footer {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 2rem var(--pad);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero h1      { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-sub     { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-links   { animation: fadeUp 0.6s 0.3s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 620px) {
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-date { text-align: left; padding-top: 0; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .results-strip { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>John Murren</h1>
-      <p>Senior Product Manager | Digital Strategy | Data-Driven Growth</p>
-      <a href="mailto:johnmurren@gmail.com">johnmurren@gmail.com</a> |
-      <a href="https://www.linkedin.com/in/john-murren/">LinkedIn</a>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-name" href="#">John Murren</a>
+  <ul class="nav-links">
+    <li><a href="#project">Project</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Product Marketing Manager</p>
+  <h1>Delivery.<br><em>Storytelling.</em><br>Growth.</h1>
+  <p class="hero-sub">12+ years turning complex B2B SaaS products into clear, compelling value — across global media, recruitment tech, and nonprofit software. Based in Stamford, CT. Dual US &amp; EU citizen.</p>
+  <div class="hero-links">
+    <a class="btn btn-primary" href="#project">View my work</a>
+    <a class="btn btn-ghost" href="https://linkedin.com/in/john-murren/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a class="btn btn-ghost" href="mailto:johnmurren@gmail.com">Get in touch</a>
+  </div>
+</div>
+
+<!-- RESULTS STRIP -->
+<section style="padding-top: 0; padding-bottom: 0; border-bottom: none;">
+  <div class="results-strip">
+    <div class="result-item">
+      <div class="result-num">15%</div>
+      <div class="result-desc">Revenue uplift via UI redesign &amp; messaging at JobTarget</div>
     </div>
-
-    <div class="section">
-      <h2>Summary</h2>
-      <p>
-        Senior Product Manager with over a decade of experience delivering B2B and B2C digital solutions across HR tech, health tech, and publishing. Proven track record of driving revenue growth, improving operational efficiency, and enhancing user experience through data-driven product strategies. Certified Scrum Product Owner with hands-on expertise in Agile development, stakeholder engagement, and cross-functional team leadership.
-      </p>
+    <div class="result-item">
+      <div class="result-num">20%</div>
+      <div class="result-desc">Organic search improvement, Springer Nature platform migration</div>
     </div>
-
-    <div class="section">
-      <h2>Professional Experience</h2>
-
-      <h3>JobTarget (2021 – 2024) – Product Manager</h3>
-      <p class="job-title">Stamford, CT (Hybrid)</p>
-      <ul>
-        <li>Led development of 8 products including Compliance, Platform, and Payments, integrating feedback loops to guide feature roadmaps.</li>
-        <li>Designed and delivered a Salesforce-integrated online onboarding application for compliance clients, reducing onboarding time by 25%</li>
-        <li>Migrated the proprietary JobManager application to coreV2 API, improving load performance and enabling advanced reporting.</li>
-        <li>Led redesign of Marketplace UI, increasing engagement and boosting product revenue by 15%.</li>
-        <li>Implemented Microsoft and Google SSO, improving login reliability and enhancing account security.</li>
-        <li>Collaborated with the marketing team to capture user feedback using UserPilot, DataDog RUM, and Hubspot.</li>
-        <li>Analyzed churn metrics and customer behavior to identify and address retention issues.</li>
-        <li>Presented product roadmaps to executive leadership, aligning product strategy with organizational goals.</li>
-        <li>Partnered with legal and security teams to ensure data handling met compliance standards.</li>
-      </ul>
-
-      <h3>Springer Nature Group (2017 – 2021) – Product Manager</h3>
-      <p class="job-title">New York, NY</p>
-      <ul>
-        <li>Led product development on <i>Scientific American</i>, collaborating with editorial, legal, and finance stakeholders.</li>
-        <li>Spearheaded the migration of institutional content from nature.com to scientificamerican.com.</li>
-        <li>Developed and executed a metered paywall strategy that increased subscription revenue by 12%.</li>
-        <li>Integrated OneTrust software for GDPR compliance, improving user trust and data privacy.</li>
-        <li>Enhanced search functionality by implementing Elasticsearch, significantly improving content discoverability.</li>
-        <li>Coordinated with editorial, legal, and finance stakeholders to align product strategy with business goals.</li>
-        <li>Oversaw CMS improvements that optimized publishing workflows and site performance.</li>
-      </ul>
-
-      <h3>The Access Group (2015 – 2017) – QA Engineer</h3>
-      <p class="job-title">Cork, Ireland</p>
-      <ul>
-        <li>Standardized QA processes with a centralized suite of test cases, reducing post-launch defects by 30%.</li>
-        <li>Conducted manual and SQL-based testing to verify data integrity and system reliability.</li>
-        <li>Created release notes and documented test cases to support product releases and future regression testing.</li>
-        <li>Collaborated with product managers and developers to validate new features and resolve defects.</li>
-      </ul>
-
-      <h3>Haymarket Media Group (2012 – 2015)</h3>
-      <p class="job-title">London, UK</p>
-      <ul>
-        <li><strong>Product Manager</strong>: Led redesign projects for mims.co.uk, mimslearning.co.uk, and gponline.com, improving site usability and engagement.</li>
-        <li>Revamped the MIMS drug database based on user research, increasing usage among healthcare professionals by 30%.</li>
-        <li>Defined test plans and executed UAT for new features and large-scale rollouts.</li>
-        <li>Worked with engineering teams to maintain continuous delivery on roadmap initiatives.</li>
-        <li><strong>Senior Ad Operations Manager</strong>: Partnered with sales and creative marketing teams to develop and implement innovative ad formats across multiple Haymarket brands, leading testing and deployment to boost ad revenue.</li>
-        <li>Created a comprehensive media pack and custom reporting dashboards to support sales teams and existing clients, enhancing transparency and driving client engagement.</li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Education</h2>
-      <p>Masters of Science in Electronic Commerce – University of Galway, Ireland</p>
-      <p>Bachelors in Business Studies – Atlantic Technological University, Ireland</p>
-    </div>
-
-    <div class="section">
-      <h2>Certifications</h2>
-      <p>Certified Scrum Product Owner – Scrum Alliance</p>
+    <div class="result-item">
+      <div class="result-num">40%</div>
+      <div class="result-desc">Onboarding cost reduction via Salesforce-integrated application</div>
     </div>
   </div>
+</section>
+
+<!-- FEATURED PROJECT -->
+<section id="project">
+  <p class="section-label">Featured Project</p>
+
+  <div class="project-hero">
+    <div class="project-tag">Founder · Editor · Marketer</div>
+    <h3>USRugbyNews.com —<br>Built from zero to community.</h3>
+    <p>An independent WordPress-based sports news and community platform covering US rugby. Every decision — from hosting and architecture to editorial strategy and social distribution — was owned end-to-end.</p>
+    <div class="project-metrics">
+      <div class="metric">
+        <div class="metric-val">0 → 1</div>
+        <div class="metric-label">Built from scratch</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">100%</div>
+        <div class="metric-label">Self-funded &amp; operated</div>
+      </div>
+      <div class="metric">
+        <div class="metric-val">US Rugby</div>
+        <div class="metric-label">Niche community served</div>
+      </div>
+    </div>
+    <a class="btn btn-ghost" href="https://usrugbynews.com" target="_blank" rel="noopener" style="border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.85);">Visit site ↗</a>
+  </div>
+
+  <div class="project-pillars">
+    <div class="pillar">
+      <div class="pillar-icon">⚙️</div>
+      <h4>Platform &amp; Build</h4>
+      <p>Launched a production WordPress site from scratch — managing hosting, theme customisation, content architecture, and plugin configuration. Hands-on experience with the exact workflows WordPress site owners navigate daily.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">✍️</div>
+      <h4>Editorial &amp; Content</h4>
+      <p>Served as founder, editor, and primary contributor — producing match coverage, analysis, and long-form features. Conducted player and manager interviews to deliver exclusive content unavailable elsewhere.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📣</div>
+      <h4>Community &amp; Social</h4>
+      <p>Owned all audience development — promoting content across social channels and actively engaging the US rugby community to build a loyal, returning readership. Applied the same messaging discipline used in professional PMM roles.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">📈</div>
+      <h4>Growth &amp; SEO</h4>
+      <p>Developed an SEO and content strategy to grow organic traffic in a competitive niche — demonstrating the same analytical, audience-first thinking applied to B2B product launches.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🎙️</div>
+      <h4>Interviews &amp; Access</h4>
+      <p>Built media relationships within the US rugby ecosystem — securing interviews with players, coaches, and managers, producing journalism-quality coverage that earned credibility with the community.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-icon">🔍</div>
+      <h4>PMM Insight</h4>
+      <p>Gained direct, first-hand insight into the real-world pain points that WordPress publishers face — informing empathetic product marketing for any platform or tool serving this audience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK EXPERIENCE -->
+<section id="work">
+  <p class="section-label">Experience</p>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Implementation &amp; Product Manager</div>
+      <div class="exp-company">Fiduciary Technology Partners — Stamford, CT</div>
+      <ul class="exp-bullets">
+        <li>Lead end-to-end product delivery across the full SDLC, coordinating engineering, operations, and client stakeholders to ship on time and within scope.</li>
+        <li>Translate complex technical requirements into user-facing communications and onboarding materials, ensuring consistent messaging across all customer touchpoints.</li>
+      </ul>
+    </div>
+    <div class="exp-date">Sep 2025 – Present</div>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Product Manager</div>
+      <div class="exp-company">JobTarget — Stamford, CT</div>
+      <ul class="exp-bullets">
+        <li>Developed and executed go-to-market plans for product launches — defining positioning, building messaging frameworks, and producing sales enablement assets including feature decks and competitive battlecards.</li>
+        <li>Led a full UI redesign of the platform's highest-revenue product area, combining Google Analytics data and customer research to optimise conversion funnels. <span class="exp-stat">+15% product revenue</span></li>
+        <li>Owned competitive monitoring for the Marketplace platform — translating competitor shifts into battlecard materials that sharpened sales performance.</li>
+        <li>Delivered a Salesforce-integrated onboarding application with a unique URL generator. <span class="exp-stat">−25% onboarding time</span> <span class="exp-stat">−40% resource costs</span></li>
+        <li>Implemented UserPilot in-app guides, improving product discoverability and refining messaging based on real adoption data.</li>
+      </ul>
+    </div>
+    <div class="exp-date">Nov 2021 – Apr 2024</div>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Product Manager</div>
+      <div class="exp-company">Springer Nature Group — New York, NY</div>
+      <ul class="exp-bullets">
+        <li>Built full positioning and messaging frameworks for a platform-wide digital subscription launch — defining value propositions by buyer persona across website copy, campaign assets, and launch materials. <span class="exp-stat">+12% subscription revenue</span></li>
+        <li>Led a high-impact migration from nature.com to scientificamerican.com — owning GTM strategy, SEO execution, and cross-functional coordination. <span class="exp-stat">+20% organic search</span> <span class="exp-stat">+15% user engagement</span></li>
+        <li>Implemented Elasticsearch across the platform, translating a technically complex capability into clear messaging for editorial and commercial audiences.</li>
+        <li>Produced competitive and market intelligence analyses to inform roadmap prioritisation across US, UK, and Asia-Pacific stakeholder groups.</li>
+      </ul>
+    </div>
+    <div class="exp-date">Aug 2017 – Nov 2021</div>
+  </div>
+
+  <div class="exp-item">
+    <div>
+      <div class="exp-role">Product Manager</div>
+      <div class="exp-company">Haymarket Media Group — London, UK</div>
+      <ul class="exp-bullets">
+        <li>Led user-centred redesigns of major digital properties — conducting user interviews and synthesising data to develop buyer personas, messaging, and product improvements.</li>
+        <li>Drove a full redesign of the MIMS clinical database grounded in customer research. <span class="exp-stat">+30% system usage</span></li>
+        <li>Produced positioning frameworks and product narratives supporting commercial teams with messaging, technical documentation, and sales enablement content.</li>
+      </ul>
+    </div>
+    <div class="exp-date">Oct 2013 – Dec 2015</div>
+  </div>
+
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">Core Skills</p>
+  <div class="skills-grid">
+    <div class="skill-item"><strong>Positioning &amp; Messaging</strong>Defining differentiated value props by buyer persona</div>
+    <div class="skill-item"><strong>Go-to-Market Execution</strong>Launch planning, sequencing, and cross-functional coordination</div>
+    <div class="skill-item"><strong>Competitive Intelligence</strong>Battlecard development and ongoing market monitoring</div>
+    <div class="skill-item"><strong>Sales Enablement</strong>Feature decks, objection handling, and rep training materials</div>
+    <div class="skill-item"><strong>SEO &amp; Content Strategy</strong>Organic growth, keyword strategy, editorial planning</div>
+    <div class="skill-item"><strong>WordPress (Publisher)</strong>Hosting, themes, plugins, content architecture</div>
+    <div class="skill-item"><strong>Digital Analytics</strong>Google Analytics, SQL, Power BI, Tableau</div>
+    <div class="skill-item"><strong>A/B Testing &amp; UX</strong>Conversion optimisation and messaging iteration</div>
+    <div class="skill-item"><strong>Salesforce</strong>CRM integration, pipeline visibility, onboarding flows</div>
+    <div class="skill-item"><strong>Agile / Scrum</strong>Certified Scrum Product Owner (Scrum Alliance)</div>
+    <div class="skill-item"><strong>Buyer Persona Development</strong>Research-grounded audience segmentation</div>
+    <div class="skill-item"><strong>Social Media Marketing</strong>Community growth and content distribution</div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section style="padding-top: 2.5rem; padding-bottom: 2.5rem;">
+  <p class="section-label">Education</p>
+  <div class="exp-item" style="padding-top: 0;">
+    <div>
+      <div class="exp-role">MSc Electronic Commerce</div>
+      <div class="exp-company">University of Galway — Ireland</div>
+    </div>
+    <div class="exp-date"></div>
+  </div>
+  <div class="exp-item" style="border-bottom: none; padding-bottom: 0;">
+    <div>
+      <div class="exp-role">BBS Business Studies</div>
+      <div class="exp-company">Atlantic Technological University — Ireland</div>
+    </div>
+    <div class="exp-date"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Get in touch</p>
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-heading">Let's build something<br><em>worth talking about.</em></h2>
+      <p class="contact-body">Open to senior product marketing and product management roles — particularly in B2B SaaS, media tech, or platforms serving publishers and content teams. Dual US &amp; EU citizen, fully authorised to work in the US.</p>
+    </div>
+    <ul class="contact-details">
+      <li>
+        <a href="mailto:johnmurren@gmail.com">
+          <span>📧</span>
+          <span>johnmurren@gmail.com</span>
+          <span class="ci">Email</span>
+        </a>
+      </li>
+      <li>
+        <a href="tel:9293586270">
+          <span>📞</span>
+          <span>929-358-6270</span>
+          <span class="ci">Phone</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://linkedin.com/in/john-murren/" target="_blank" rel="noopener">
+          <span>💼</span>
+          <span>linkedin.com/in/john-murren</span>
+          <span class="ci">LinkedIn ↗</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://usrugbynews.com" target="_blank" rel="noopener">
+          <span>🏉</span>
+          <span>usrugbynews.com</span>
+          <span class="ci">Project ↗</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <span>John Murren · Product Marketing · Stamford, CT</span>
+  <span>© 2026</span>
+</footer>
+
 </body>
 </html>
-
-
