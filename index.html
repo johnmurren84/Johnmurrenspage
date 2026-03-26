@@ -95,20 +95,30 @@
   }
   .hero h1 {
     font-family: var(--font-display);
-    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    /* Slightly smaller scale to ensure it fits on one line across most screens */
+    font-size: clamp(1.6rem, 4.2vw, 2.8rem); 
     font-weight: 400;
-    line-height: 1.15;
+    line-height: 1.2;
     letter-spacing: -0.01em;
-    margin-bottom: 0.85rem;
-    font-style: italic;
+    margin-bottom: 1.5rem; /* More breathing room below heading */
     color: var(--accent);
+    white-space: nowrap; /* Forces one line */
   }
+
   .hero-sub {
-    font-size: 0.95rem;
+    font-size: 1rem; /* Slightly larger for better readability */
     color: var(--ink-mid);
-    max-width: 560px;
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
+    max-width: 640px; /* Wider for single-line heading balance */
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  /* Responsive fix: allow wrap on small mobile screens so it doesn't break layout */
+  @media (max-width: 480px) {
+    .hero h1 { 
+      white-space: normal; 
+      font-size: 2rem;
+    }
   }
   .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn {
